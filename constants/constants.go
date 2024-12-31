@@ -1,0 +1,6 @@
+package constants
+
+const (
+	TOKEN_INVALID = "TOKEN IS INVALID"
+	TOKEN_EXPIRED = "TOKEN HAS EXPIRED"
+)

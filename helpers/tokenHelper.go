@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/shreyash2503/golang-jwt/constants"
 	"github.com/shreyash2503/golang-jwt/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -40,6 +41,7 @@ func GenerateAllTokens(email string, firstName string, lastName string, userType
 	}
 
 	refreshClaims := &SignedDetails {
+		Uid: uid,
 		RegisteredClaims : jwt.RegisteredClaims {
 			ExpiresAt: jwt.NewNumericDate(time.Now().Local().Add(time.Hour * 24 * 7)),
 		},
@@ -110,13 +112,13 @@ func ValidateToken(signedToken string) (claims *SignedDetails, msg string) {
 	}
 	claims, ok := token.Claims.(*SignedDetails)
 	if !ok {
-		msg = "The token is invalid"
+		msg = constants.TOKEN_INVALID
 		msg = err.Error()
 		return
 	}
 
 	if claims.ExpiresAt.Before(time.Now().Local()) {
-		msg = "Token has expired"
+		msg = constants.TOKEN_EXPIRED
 		return
 	}
 

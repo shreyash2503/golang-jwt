@@ -15,8 +15,21 @@ func Authenticate(c *gin.Context) {
 		return
 	}
 	
-	claims, err := helpers.ValidateToken(clientToken)
+	accessClaims, err1 := helpers.ValidateToken(clientToken)
+	if err1 != ""{
+		c.JSON(403, gin.H{
+			"error": "Invalid token, Please login again",
+		})
+	}
 
+	if err1 != "" {
+		//! Refresh token
+	}
+	c.Set("email", accessClaims.Email)
+	c.Set("first_name", accessClaims.First_name)
+	c.Set("last_name", accessClaims.Last_name)
+	c.Set("uid", accessClaims.Uid)
+	c.Set("user_type", accessClaims.User_type)
 
 	c.Next()
 
