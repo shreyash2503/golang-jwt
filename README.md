@@ -4,8 +4,8 @@
 - It is built with Golang and the Gin framework.
 - It 2 main routes which are:
 
-  - `/api/auth/signup` - for registering a user
-  - `/api/auth/login` - for logging in a user
+  - `/api/users/signup` - for registering a user
+  - `/api/users/login` - for logging in a user
 
 - The API uses refresh tokens to generate new access tokens when the current access token expires.
 - Maximum 5 valid sessions are allowed per user.
